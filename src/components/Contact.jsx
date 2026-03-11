@@ -10,15 +10,50 @@ const Contact = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Simulate form submission
     setStatus('sending');
+    
+    // We are using Web3Forms, a free service that doesn't require backend code.
+    // It sends the form data straight to your email.
+    
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "YOUR_WEB3FORMS_ACCESS_KEY", // Note to Kota: You must replace this!
+          subject: "New Portfolio Contact Message",
+          from_name: formData.name,
+          ...formData
+        }),
+      });
+
+      const result = await response.json();
+      
+      if (result.success) {
+        setStatus('sent');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        console.error(result);
+        setStatus('error');
+      }
+    } catch (error) {
+      console.error(error);
+      setStatus('error');
+    }
+
+    // Reset status back to default after delay
     setTimeout(() => {
-      setStatus('sent');
-      setFormData({ name: '', email: '', message: '' });
-      setTimeout(() => setStatus(''), 3000);
-    }, 1500);
+      if (status !== 'error') {
+          setStatus('');
+      } else {
+          setStatus(''); // Optionally leave error message longer
+      }
+    }, 4000);
   };
 
   return (
@@ -45,7 +80,7 @@ const Contact = () => {
           </p>
 
           <a 
-            href="mailto:kota.deepthi@example.com"
+            href="mailto:kotadeepthi2005@gmail.com"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-md bg-[var(--color-primary)] text-white font-medium hover:bg-[var(--color-primary-hover)] transition-colors mb-16 shadow-lg shadow-violet-500/20"
           >
             <FiMail size={20} /> Say Hello
@@ -53,6 +88,7 @@ const Contact = () => {
 
           <div className="glass-card p-8 md:p-10 rounded-2xl text-left border-[var(--color-dark-border)] border">
             <h3 className="text-2xl font-semibold text-white mb-6">Send a Message</h3>
+            
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -95,6 +131,7 @@ const Contact = () => {
                   placeholder="Your message here..."
                 ></textarea>
               </div>
+              
               <button 
                 type="submit" 
                 disabled={status === 'sending'}
@@ -104,11 +141,17 @@ const Contact = () => {
                   <span className="animate-pulse">Sending...</span>
                 ) : status === 'sent' ? (
                   'Message Sent!'
+                ) : status === 'error' ? (
+                  <span className="text-red-400">Error! Try directly emailing.</span>
                 ) : (
                   <>Send Message <FiSend className="group-hover:translate-x-1 transition-transform stroke-2" /></>
                 )}
               </button>
             </form>
+
+            <p className="mt-4 text-xs text-center text-gray-500">
+                Powered by Web3Forms.
+            </p>
           </div>
         </motion.div>
       </div>
