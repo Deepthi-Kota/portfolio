@@ -34,13 +34,21 @@ const About = () => {
             </div>
           </div>
 
-          {/* Decorative Visual/Image Placeholder */}
+          {/* Decorative Visual/Image Profile */}
           <div className="w-full lg:w-1/3 flex justify-center lg:justify-end">
-            <div className="relative group w-64 h-64">
+            <div className="relative group w-64 h-80 md:w-72 md:h-96">
               <div className="absolute inset-0 bg-[var(--color-primary)] mix-blend-overlay rounded-lg z-10 opacity-20 group-hover:opacity-0 transition-opacity duration-500"></div>
               <div className="absolute inset-0 border-2 border-[var(--color-primary)] rounded-lg translate-x-4 translate-y-4 -z-10 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-300"></div>
               <div className="w-full h-full bg-[var(--color-dark-surface)] border border-[var(--color-dark-border)] rounded-lg overflow-hidden flex items-center justify-center relative z-20">
-                <span className="text-8xl font-bold text-[var(--color-dark-bg)] bg-clip-text gradient-text opacity-50 select-none">KD</span>
+                <img 
+                  src="/profile.jpg" 
+                  alt="Kota Deepthi" 
+                  className="w-full h-full object-cover transition-all duration-500"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "https://ui-avatars.com/api/?name=Kota+Deepthi&background=0a0a0b&color=8b5cf6&size=512";
+                  }}
+                />
               </div>
             </div>
           </div>

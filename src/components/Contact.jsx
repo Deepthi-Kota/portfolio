@@ -35,7 +35,7 @@ const Contact = () => {
           className="max-w-3xl mx-auto text-center"
         >
           <div className="inline-block mb-4">
-            <span className="text-[var(--color-primary)] font-mono text-lg font-medium">05. What's Next?</span>
+            <span className="text-[var(--color-primary)] font-mono text-lg font-medium">06. What's Next?</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">Get In Touch</h2>
           
