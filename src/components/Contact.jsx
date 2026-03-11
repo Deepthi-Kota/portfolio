@@ -25,7 +25,7 @@ const Contact = () => {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: "YOUR_WEB3FORMS_ACCESS_KEY", // Note to Kota: You must replace this!
+          access_key: "6756faf8-9a01-4c80-886b-09328be5ddbe", // Note to Kota: You must replace this!
           subject: "New Portfolio Contact Message",
           from_name: formData.name,
           ...formData
