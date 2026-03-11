@@ -4,6 +4,8 @@ import { FiDownload, FiArrowRight } from 'react-icons/fi';
 import { Link } from 'react-scroll';
 
 const Hero = () => {
+  const resumeUrl = `${import.meta.env.BASE_URL}resume.pdf`;
+
   return (
     <section 
       id="hero" 
@@ -68,7 +70,7 @@ const Hero = () => {
             </Link>
             
             <a
-              href="/resume.pdf"
+              href={resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-3 rounded-md bg-transparent border border-[var(--color-dark-border)] glass-card hover:border-[var(--color-primary)] hover:text-white transition-all text-[var(--color-text-main)] font-medium flex items-center justify-center gap-2 group"

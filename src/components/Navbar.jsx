@@ -4,6 +4,7 @@ import { FiMenu, FiX } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
+  const resumeUrl = `${import.meta.env.BASE_URL}resume.pdf`;
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -59,7 +60,7 @@ const Navbar = () => {
             </Link>
           ))}
           <a
-            href="/resume.pdf"
+            href={resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="px-5 py-2 rounded-full bg-transparent border border-[var(--color-primary)] text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-all text-sm font-medium"
@@ -100,7 +101,7 @@ const Navbar = () => {
               </Link>
             ))}
             <a
-              href="/resume.pdf"
+              href={resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-4 px-6 py-3 rounded-md bg-[var(--color-primary)] text-white text-center font-medium opacity-90 hover:opacity-100 transition-opacity"

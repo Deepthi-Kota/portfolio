@@ -2,6 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const About = () => {
+  const profileImageSrc = `${import.meta.env.BASE_URL}profile.jpg`;
+
   return (
     <section id="about" className="py-20 relative">
       <div className="container mx-auto px-6 md:px-12">
@@ -41,7 +43,7 @@ const About = () => {
               <div className="absolute inset-0 border-2 border-[var(--color-primary)] rounded-lg translate-x-4 translate-y-4 -z-10 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-300"></div>
               <div className="w-full h-full bg-[var(--color-dark-surface)] border border-[var(--color-dark-border)] rounded-lg overflow-hidden flex items-center justify-center relative z-20">
                 <img 
-                  src="/profile.jpg" 
+                  src={profileImageSrc}
                   alt="Kota Deepthi" 
                   className="w-full h-full object-cover transition-all duration-500"
                   onError={(e) => {

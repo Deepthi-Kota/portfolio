@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FiMail, FiSend } from 'react-icons/fi';
 
 const Contact = () => {
+  const web3FormsAccessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState('');
 
@@ -13,9 +14,15 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('sending');
-    
-    // We are using Web3Forms, a free service that doesn't require backend code.
-    // It sends the form data straight to your email.
+
+    if (!web3FormsAccessKey) {
+      console.error('Missing VITE_WEB3FORMS_ACCESS_KEY');
+      setStatus('error');
+      setTimeout(() => {
+        setStatus('');
+      }, 4000);
+      return;
+    }
     
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -25,7 +32,7 @@ const Contact = () => {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: "6756faf8-9a01-4c80-886b-09328be5ddbe", // Note to Kota: You must replace this!
+          access_key: web3FormsAccessKey,
           subject: "New Portfolio Contact Message",
           from_name: formData.name,
           ...formData
